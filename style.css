@@ -253,6 +253,7 @@ footer {
 
 input[type='text'],
 input[type='email'],
+select,
 fieldset,
 textarea {
   width: 100%;
