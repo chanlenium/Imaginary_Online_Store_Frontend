@@ -8,10 +8,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <script src="script.js"></script>
   </head>
   <body>
     <header class="page-heading">
-      <a href="#"> <img src="image/logo.JPG" alt="Fairy Tale Store" /> </a>
+      <a href="index.html"> <img src="image/logo.JPG" alt="Fairy Tale Store" /> </a>
       <h1>Fairy Tale Store</h1>
       <h3>THE BEST FAIRY SHOP</h3>
     </header>
@@ -46,7 +47,7 @@
       <div id="body-wrapper" class="row"></div>
 
       <div id="boby-contactUs">
-        <form action="https://httpbin.org/post" method="post" id="usrform">
+        <form autocomplete="off" action="https://httpbin.org/post" method="post" id="usrform">
           <h3>Contact email</h3>
 
           <div class="contactRow">
@@ -58,7 +59,9 @@
                 type="text"
                 name="userName"
                 id="userName"
-                placeholder="Input your name here"
+                placeholder="Input your name here (Max Length: 30)"
+                minlength="3"
+                maxlength="30"
                 required="required"
               />
             </div>
@@ -74,7 +77,9 @@
                 name="userEmail"
                 id="userEmail"
                 required="required" 
-                placeholder="Input your email here"
+                minlength="3"
+                maxlength="30"
+                placeholder="Input your email here (Max Length: 30)"
                 /><br />
             </div>
           </div>
@@ -88,8 +93,10 @@
                 type="text"
                 name="userAddress"
                 id="userAddress"
-                required="required" 
-                placeholder="Input your address here"
+                required="required"
+                minlength="3" 
+                maxlength="30"
+                placeholder="Input your address here (Max length: 30)"
                 /><br />
             </div>
           </div>
@@ -99,15 +106,8 @@
               <label for="userCity">City: </label>
             </div>
             <div class="col-75">
-              <input
-                type="text"
-                list="cities"
-                name="userCity"
-                id="userCity"
-                required="required"
-                placeholder="Click here to select"
-              />
-              <datalist id="cities">
+              <select name="cities" id="userCity" required>
+                <option value="" disabled selected hidden>Choose a city</option>
                 <option value="Ottawa">Ottawa</option>
                 <option value="Edmonton">Edmonton</option>
                 <option value="Victoria">Victoria</option>
@@ -122,7 +122,7 @@
                 <option value="Yellowknife">Yellowknife</option>
                 <option value="Iqaluit">Iqaluit</option>
                 <option value="Whitehorse">Whitehorse</option>
-              </datalist>
+              </select>
             </div>
           </div>
 
@@ -137,7 +137,7 @@
                 id="Postal Code"
                 pattern="([A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9])|([A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9])" 
                 required="required"
-                placeholder="Zip Code"
+                placeholder="Zip Code (Expression: 'A0A A0A' or 'A0AA0A')"
               /><br />
             </div>
           </div>
@@ -192,6 +192,7 @@
             <div class="col-75">
               <textarea
                 name="comment"
+                id="userComment"
                 form="usrform"
                 cols="30"
                 rows="10"
@@ -227,6 +228,48 @@
     </footer>
 
     <script>
+      // user Name Field input Validation //
+      var form = document.getElementById('usrform');
+      var userNameField = document.querySelector("#userName")
+      userNameField.addEventListener('keyup', (event) => {
+        var allAlpha = true;
+        var inputUserName = userNameField.value.trim().toUpperCase();
+        if(inputUserName.length === 0){
+          allAlpha = false;
+        }else{
+          for (var i = 0; i < inputUserName.length; i++){
+            if (inputUserName.charAt(i) < "A" || inputUserName.charAt(i) > "Z"){
+              if(inputUserName.charAt(i) !== " "){
+                allAlpha = false;
+              } 
+            }
+          }
+        }
+        if (!allAlpha){
+          alert("Name : Please enter a meaningful name with all alphabet letters.");
+          userNameField.value = '';
+          userNameField.focus();
+        } 
+        return allAlpha;
+      });
+      
+
+      // Address Field input Validation //
+      var addrField = document.querySelector("#userAddress")
+      addrField.addEventListener('keyup', (event) => {
+        var allNoOrAlpha = true;
+        var inputAddr = addrField.value.trim().toUpperCase();
+        if(inputAddr.length === 0){
+          allNoOrAlpha = false;
+        }
+        if (!allNoOrAlpha){
+          alert("Address : Please enter a meaningful address with all characters.");
+          addrField.value = '';
+          addrField.focus();
+        } 
+        return allNoOrAlpha;
+      });
+
       var questionRadioBtn = document.getElementById('inquery-1');
       questionRadioBtn.addEventListener('change', function() {
         let removeNode = document.querySelector('#usrform > div:nth-child(8)');
@@ -256,6 +299,8 @@
         tempInput.type = 'text';
         tempInput.name = 'orderNumber';
         tempInput.id = 'orderNumber';
+        tempInput.maxlength="10"
+        tempInput.placeholder="Input your order number (Max length: 10)"
         col75.appendChild(tempInput);
         orderNumber.appendChild(col25);
         orderNumber.appendChild(col75);
@@ -263,6 +308,37 @@
         let point = document.querySelector('#usrform > div:nth-child(8)');
         let parentNode = point.parentNode;
         parentNode.insertBefore(orderNumber, point);
+
+        // order Number Field input Validation (Active only when order problem is selected)//
+        var orderNoField = document.querySelector("#orderNumber")
+        orderNoField.addEventListener('keyup', (event) => {
+          var allNo = true;
+          var inputOrderNo = orderNoField.value.trim();
+          if (parseInt(inputOrderNo) != inputOrderNo) {
+            alert('Please enter numbers only');
+            orderNoField.value = '';
+            orderNoField.focus();
+            allNo = false; // failed for validation
+          }   
+          return allNo;
+        });
+      });
+
+      // Text Area input Validation //
+      var commentField = document.querySelector("#userComment")
+      commentField.addEventListener('click', function(){commentField.value = '';});
+      commentField.addEventListener('keyup', (event) => {
+        var allNoOrAlpha = true;
+        var inputComment = commentField.value.trim().toUpperCase();
+        if(inputComment.length === 0){
+          allNoOrAlpha = false;
+        }
+        if (!allNoOrAlpha){
+          alert("Address : Please enter a meaningful comments with all characters.");
+          commentField.value = '';
+          commentField.focus();
+        } 
+        return allNoOrAlpha;
       });
     </script>
   </body>
