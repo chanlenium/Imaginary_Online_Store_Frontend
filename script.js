@@ -171,6 +171,7 @@ window.onload = function() {
   function listingAllItems(elem) {
     elem.stopPropagation();
     elem.preventDefault();
+    document.querySelector('#boby-contactUs').innerHTML = '';
     // Change table contents if a current clicked menu is not the same as a previous clicked menu
     if (this.innerText !== previousClickMenu) {
       document.querySelector('#body-wrapper').innerHTML = ''; // Delete all of the previous table contents
@@ -192,6 +193,7 @@ window.onload = function() {
   function listingAllfairyBook(elem) {
     elem.stopPropagation();
     elem.preventDefault();
+    document.querySelector('#boby-contactUs').innerHTML = '';
     // Change table contents if a current clicked menu is not the same as a previous clicked menu
     if (this.innerText !== previousClickMenu) {
       document.querySelector('#body-wrapper').innerHTML = ''; // Delete all of the previous table contents
@@ -212,6 +214,7 @@ window.onload = function() {
   function listingFairyReadingBook(elem) {
     elem.stopPropagation();
     elem.preventDefault();
+    document.querySelector('#boby-contactUs').innerHTML = '';
     // Change table contents if a current clicked menu is not the same as a previous clicked menu
     if (this.innerText !== previousClickMenu) {
       document.querySelector('#body-wrapper').innerHTML = ''; // Delete all of the previous table contents
@@ -231,6 +234,7 @@ window.onload = function() {
   function listingFairyActivityBook(elem) {
     elem.stopPropagation();
     elem.preventDefault();
+    document.querySelector('#boby-contactUs').innerHTML = '';
     // Change table contents if a current clicked menu is not the same as a previous clicked menu
     if (this.innerText !== previousClickMenu) {
       document.querySelector('#body-wrapper').innerHTML = ''; // Delete all of the previous table contents
@@ -250,6 +254,7 @@ window.onload = function() {
   function listingAllpicture(elem) {
     elem.stopPropagation();
     elem.preventDefault();
+    document.querySelector('#boby-contactUs').innerHTML = '';
     // Change table contents if a current clicked menu is not the same as a previous clicked menu
     if (this.innerText !== previousClickMenu) {
       document.querySelector('#body-wrapper').innerHTML = ''; // Delete all of the previous table contents
@@ -269,6 +274,7 @@ window.onload = function() {
   function listingPoster(elem) {
     elem.stopPropagation();
     elem.preventDefault();
+    document.querySelector('#boby-contactUs').innerHTML = '';
     // Change table contents if a current clicked menu is not the same as a previous clicked menu
     if (this.innerText !== previousClickMenu) {
       document.querySelector('#body-wrapper').innerHTML = ''; // Delete all of the previous table contents
@@ -288,6 +294,7 @@ window.onload = function() {
   function listingPostCard(elem) {
     elem.stopPropagation();
     elem.preventDefault();
+    document.querySelector('#boby-contactUs').innerHTML = '';
     // Change table contents if a current clicked menu is not the same as a previous clicked menu
     if (this.innerText !== previousClickMenu) {
       document.querySelector('#body-wrapper').innerHTML = ''; // Delete all of the previous table contents
